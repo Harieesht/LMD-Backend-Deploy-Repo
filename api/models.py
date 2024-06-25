@@ -13,6 +13,7 @@ class College(models.Model):
         ("Crescent", "Crescent"),
         ("Jamal Mohamad", "Jamal Mohamad"),
         ("Malla Reddy", "Malla Reddy"),
+        ("MHCockpit","MHCockpit"),
     ]
 
     name = models.CharField(max_length=100, choices=NAME_CHOICES)
