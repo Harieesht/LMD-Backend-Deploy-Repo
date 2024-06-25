@@ -36,9 +36,9 @@ AUTH_USER_MODEL = 'users.User' #Custom User Class
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["http://localhost:5173",'https://starfish-app-atkd8.ondigitalocean.app/']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -177,9 +177,9 @@ STATICFILES_DIRS = [
     # Add more directories if necessary
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Replace with your local frontend URL
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",  # Replace with your local frontend URL
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
