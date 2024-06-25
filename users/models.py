@@ -34,17 +34,17 @@ class User(AbstractUser):
         
         
     
-    # def save(self, *args, **kwargs):
-    #     """
-    #     Override save method to hash password only if it's set or changed.
-    #     """
-    #     if self.password and (not self.pk or self._state.adding or self.password != self._original_password):
-    #         self.set_password(self.password)
-    #     if not self.user_id and self._state.adding:
-    #         self.user_id=f"{self.college}-{self.user_type}-{randint(10000,99999)}"
+    def save(self, *args, **kwargs):
+        """
+        Override save method to hash password only if it's set or changed.
+        """
+        if self.password and (not self.pk or self._state.adding or self.password != self._original_password):
+            self.set_password(self.password)
+        if not self.user_id and self._state.adding:
+            self.user_id=f"{self.college}-{self.user_type}-{randint(10000,99999)}"
             
         
-    #     super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
         
     def __str__(self):
         if self.is_superuser:
