@@ -38,7 +38,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["http://localhost:5173"]
+ALLOWED_HOSTS = ["http://localhost:5173",'https://starfish-app-atkd8.ondigitalocean.app/']
 
 
 # Application definition
