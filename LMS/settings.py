@@ -36,7 +36,7 @@ AUTH_USER_MODEL = 'users.User' #Custom User Class
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
