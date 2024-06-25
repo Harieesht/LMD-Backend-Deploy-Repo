@@ -36,9 +36,9 @@ AUTH_USER_MODEL = 'users.User' #Custom User Class
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://localhost:5173']
+ALLOWED_HOSTS = []
 
 
 # Application definition
