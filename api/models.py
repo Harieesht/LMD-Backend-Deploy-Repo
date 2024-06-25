@@ -100,7 +100,7 @@ class SubjectProgress(models.Model):
     progress=models.PositiveSmallIntegerField()
     completed=models.BooleanField(default=False)
     
-    def save(self,args,*kwargs):
+    def save(self,*args,**kwargs):
         if self.progress==100:
             self.completed=True
         super().save(args,*kwargs)
