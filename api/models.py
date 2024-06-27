@@ -123,6 +123,9 @@ class ChapterQuiz(models.Model):
     choice_d=models.CharField(max_length=200)
     correct_answer=models.CharField(max_length=1,choices=answer)
     active=models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.chapter_name}-{self.id}"
     
 
 class StudentChapterQuizAnswer(models.Model):
