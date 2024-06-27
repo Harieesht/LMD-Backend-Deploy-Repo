@@ -187,6 +187,7 @@ def quiz_evaluate(request,quiz_id):
             
             studentquizanswer=StudentChapterQuizAnswer.objects.get(chapterquiz_id=quiz_id,student_id=user_id)
             studentquizanswer.is_correct=is_correct
+            studentquizanswer.selected_option=selected_option
             studentquizanswer.save()
             return Response({'message':'student answer is saved'},status=status.HTTP_201_CREATED)
         else:
