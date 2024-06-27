@@ -88,7 +88,7 @@ class Teacher(models.Model):
         super().save(*args, **kwargs)
         
     def __str__(self):
-        return self.teacher_id
+        return f"{self.name}-{self.teacher_id}"
 
 @receiver(post_save, sender=User)
 def custom_user_created(sender, instance, created, **kwargs):
