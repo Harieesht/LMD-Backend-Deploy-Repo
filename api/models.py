@@ -125,7 +125,7 @@ class ChapterQuiz(models.Model):
     active=models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.chapter_name}-{self.id}"
+        return f"{self.chapter.name}-{self.id}"
     
 
 class StudentChapterQuizAnswer(models.Model):
