@@ -69,7 +69,7 @@ class Student(models.Model):
         super().save(*args, **kwargs)
         
     def __str__(self):
-        return self.student_id
+        return f"{self.name}-{self.student_id}"
 
 class Teacher(models.Model):
     """
