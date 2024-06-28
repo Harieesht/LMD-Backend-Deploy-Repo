@@ -219,7 +219,7 @@ def chapter_quiz_evaluate(request):
     studentchapterquizanswercorrectcount=StudentChapterQuizAnswer.objects.filter(chapter_id=chapter_id,is_correct=True).count()
     print(studentchapterquizanswercorrectcount)
     
-    progress=(studentchapterquizanswercorrectcount/chapterquizcount)*100
+    progress=(float(studentchapterquizanswercorrectcount)/chapterquizcount)*100
     
     studentchapterprogressexists=StudentChapterQuizProgressPercent.objects.filter(chapter_id=chapter_id,student_id=user_id).exists()
     
