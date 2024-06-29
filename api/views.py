@@ -248,27 +248,14 @@ def chapter_quiz_evaluate(request):
         except StudentChapterQuizProgressPercent.DoesNotExist:
             continue
     
-    # try : 
-    #     subjectprogress = SubjectProgress.objects.get(student_id=user_id,subject_id=subject_id)
-    #     subjectprogress.progress = progress//len(chapter_ids)
-    #     subjectprogress.save()     
-    # except ObjectDoesNotExist:    
-    #     subjectprogress = SubjectProgress.objects.create(student_id=user_id,subject_id=subject_id)
-    #     subjectprogress.progress = progress//len(chapter_ids)
-    #     subjectprogress.save()
-
-    try:
-        with transaction.atomic():
-            subjectprogress = SubjectProgress.objects.select_for_update().get(student_id=user_id, subject_id=subject_id)
-            subjectprogress.progress = progress // len(chapter_ids)
-            subjectprogress.save()
-        
-    except ObjectDoesNotExist:
-        with transaction.atomic():
-            subjectprogress = SubjectProgress.objects.create(student_id=user_id, subject_id=subject_id)
-            subjectprogress.progress = progress // len(chapter_ids)
-            subjectprogress.save()
-
+    try : 
+        subjectprogress = SubjectProgress.objects.get(student_id=user_id,subject_id=subject_id)
+        subjectprogress.progress = progress//len(chapter_ids)
+        subjectprogress.save()     
+    except ObjectDoesNotExist:    
+        subjectprogress = SubjectProgress.objects.create(student_id=user_id,subject_id=subject_id)
+        subjectprogress.progress = progress//len(chapter_ids)
+        subjectprogress.save()
     
     print(progress)
     print(len(chapter_ids))
