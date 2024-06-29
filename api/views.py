@@ -212,6 +212,7 @@ def chapter_quiz_evaluate(request):
     user_id=decoded_token.get('user_id')
     chapter_id=request.data.get('chapter_id')
     
+    
     chapterquizes=ChapterQuiz.objects.filter(chapter_id=chapter_id)
     
     chapterquizcount=chapterquizes.count()
@@ -232,7 +233,31 @@ def chapter_quiz_evaluate(request):
         studentchapterprogress=StudentChapterQuizProgressPercent.objects.create(chapter_id=chapter_id,student_id=user_id,progress=progress)
         studentchapterprogress.save() 
         
+    chapter = Chapter.objects.get(id=chapter_id)  # getting chapter object by chapter_id
+    subject_id = chapter.subject.id             #getting subject id by chapter object
+        
+    chapter_ids = Chapter.objects.filter(subject_id=subject_id).values_list('id')
     
+    progress = 0
+    for id in chapter_ids:
+        try :
+            studentchapterprogress=StudentChapterQuizProgressPercent.objects.get(chapter_id=id,student_id=user_id)
+            progress += studentchapterprogress.progress
+        except StudentChapterQuizProgressPercent.DoesNotExist:
+            continue
+    
+    try : 
+        subjectprogress = SubjectProgress.objects.get(student_id=user_id,subject_id=subject_id)
+        subjectprogress.progress = progress//len(chapter_ids)
+        subjectprogress.save()
+        
+    except SubjectProgress.DoesNotExist:    
+        subjectprogress = SubjectProgress.objects.create(student_id=user_id,subject_id=subject_id)
+        subjectprogress.progress = progress//len(chapter_ids)
+        subjectprogress.save()
+    print(progress)
+    print(len(chapter_ids))
+        
     return Response({'message':'Progress have been saved','progress':studentchapterprogress.progress},status=status.HTTP_201_CREATED) 
 
 @api_view(['POST'])
