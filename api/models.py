@@ -126,6 +126,7 @@ class ChapterQuiz(models.Model):
     choice_c=models.CharField(max_length=1000)
     choice_d=models.CharField(max_length=1000)
     correct_answer=models.CharField(max_length=1,choices=answer)
+    Explanation=models.TextField(null=True,blank=True)
     active=models.BooleanField(default=True)
 
     def __str__(self):
@@ -137,7 +138,7 @@ class StudentChapterQuizAnswer(models.Model):
     chapterquiz=models.ForeignKey(ChapterQuiz,on_delete=models.CASCADE)
     chapter=models.ForeignKey(Chapter,on_delete=models.CASCADE)
     student=models.ForeignKey(Student,on_delete=models.CASCADE)
-    selected_answer=models.CharField(max_length=1)
+    selected_answer=models.CharField(max_length=1,null=True,blank=True)
     is_correct=models.BooleanField(default=False)
     
     def save(self,*args,**kwargs):
