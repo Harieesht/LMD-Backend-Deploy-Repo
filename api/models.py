@@ -126,6 +126,7 @@ class ChapterQuiz(models.Model):
     choice_c=models.CharField(max_length=1000)
     choice_d=models.CharField(max_length=1000)
     correct_answer=models.CharField(max_length=1,choices=answer)
+    Explanation=models.TextField(null=True,blank=True)
     active=models.BooleanField(default=True)
 
     def __str__(self):
