@@ -315,8 +315,24 @@ def post_question_answers(request):
     return Response({'message':'post have been saved'},status=status.HTTP_201_CREATED)
     
     
+@api_view(['GET'])
+def get_student_chapter_quiz_report(request,chapter_id):
+        decoded_token=authenticate(request)
     
+        if decoded_token.get('message'):
+            message=decoded_token.get('message')
+            message_status=decoded_token.get('status')
+            return Response({'message':message},status=message_status)
         
+        user_id = decoded_token.get('user_id')
+        chapter_id = chapter_id
+
+        studentchapterquizanswer = StudentChapterQuizAnswer.objects.filter(student_id=user_id,chapter_id=chapter_id)
+        
+        studentchapterquizanswerserializer = api_serializers.StudentChapterQuizAnswerSerializer(studentchapterquizanswer,many=True)
+        
+        return Response({'details':studentchapterquizanswerserializer.data},status=status.HTTP_202_ACCEPTED)
+    
         
         
         

@@ -17,5 +17,6 @@ urlpatterns = [
     path('user/subject/get_question/<int:subject_id>',api_views.get_questions), 
     path('user/subject/get_question_answer/<int:question_id>',api_views.get_question_answers), 
     path('user/subject/post_question_answer/',api_views.post_question_answers), 
+    path('user/subject/chapter-quiz-report/<int:chapter_id>',api_views.get_student_chapter_quiz_report),
 ]
 

@@ -70,6 +70,19 @@ class ChapterQuizSerializer(serializers.ModelSerializer):
     class Meta:
         model=ChapterQuiz
         fields='__all__'        
+        
+class CustomChapterQuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=ChapterQuiz
+        fields = ['question','correct_answer']     
+           
+class StudentChapterQuizAnswerSerializer(serializers.ModelSerializer):
+    
+    chapterquiz = CustomChapterQuizSerializer()
+    
+    class Meta:
+        model=StudentChapterQuizAnswer
+        fields=['chapterquiz','selected_answer']
 
 
 class SubjectQuestionSerializer(ModelSerializer):
