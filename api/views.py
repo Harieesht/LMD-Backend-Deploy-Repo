@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
 import jwt
 from django.conf import settings
 from .models import  *
@@ -255,6 +256,20 @@ def chapter_quiz_evaluate(request):
     #     subjectprogress = SubjectProgress.objects.create(student_id=user_id,subject_id=subject_id)
     #     subjectprogress.progress = progress//len(chapter_ids)
     #     subjectprogress.save()
+
+    try:
+        with transaction.atomic():
+            subjectprogress = SubjectProgress.objects.select_for_update().get(student_id=user_id, subject_id=subject_id)
+            subjectprogress.progress = progress // len(chapter_ids)
+            subjectprogress.save()
+        
+    except ObjectDoesNotExist:
+        with transaction.atomic():
+            subjectprogress = SubjectProgress.objects.create(student_id=user_id, subject_id=subject_id)
+            subjectprogress.progress = progress // len(chapter_ids)
+            subjectprogress.save()
+
+    
     print(progress)
     print(len(chapter_ids))
         
