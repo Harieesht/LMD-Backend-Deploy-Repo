@@ -138,7 +138,7 @@ class StudentChapterQuizAnswer(models.Model):
     chapterquiz=models.ForeignKey(ChapterQuiz,on_delete=models.CASCADE)
     chapter=models.ForeignKey(Chapter,on_delete=models.CASCADE)
     student=models.ForeignKey(Student,on_delete=models.CASCADE)
-    selected_answer=models.CharField(max_length=1)
+    selected_answer=models.CharField(max_length=1,null=True,blank=True)
     is_correct=models.BooleanField(default=False)
     
     def save(self,*args,**kwargs):
