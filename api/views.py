@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
+from django.core.exceptions import ObjectDoesNotExist
 import jwt
 from django.conf import settings
 from .models import  *
@@ -249,9 +250,8 @@ def chapter_quiz_evaluate(request):
     try : 
         subjectprogress = SubjectProgress.objects.get(student_id=user_id,subject_id=subject_id)
         subjectprogress.progress = progress//len(chapter_ids)
-        subjectprogress.save()
-        
-    except SubjectProgress.DoesNotExist:    
+        subjectprogress.save()     
+    except ObjectDoesNotExist:    
         subjectprogress = SubjectProgress.objects.create(student_id=user_id,subject_id=subject_id)
         subjectprogress.progress = progress//len(chapter_ids)
         subjectprogress.save()
