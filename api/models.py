@@ -99,6 +99,10 @@ class SubjectProgress(models.Model):
     student=models.ForeignKey(Student,on_delete=models.PROTECT,related_name='progress')
     progress=models.PositiveSmallIntegerField()
     completed=models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return f"{self.student.name}-{self.subject.title} Progress"
     
     def save(self,*args,**kwargs):
         if self.progress==100:
@@ -144,7 +148,7 @@ class StudentChapterQuizAnswer(models.Model):
 class StudentChapterQuizProgressPercent(models.Model):
     
     chapter=models.ForeignKey(Chapter,on_delete=models.CASCADE)
-    # chapterquiz=models.ForeignKey(ChapterQuiz,on_delete=models.CASCADE)
+    
     student=models.ForeignKey(Student,on_delete=models.CASCADE)
     progress=models.IntegerField()
     
@@ -162,6 +166,9 @@ class StudentChapterQuizProgressPercent(models.Model):
         correct_answer_count=self.correct_answer_count()
         
         return (correct_answer_count/quiz_count)*100
+
+    def __str__(self):
+        return f"{self.student.name}-{self.chapter.name} Progress"
         
  
 class SubjectQuestion(models.Model):
