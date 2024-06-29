@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='studentchapterquizanswer',
             name='selected_answer',
-            field=models.CharField(default='A', max_length=1),
+            field=models.CharField(blank=True, max_length=1, null=True),
             preserve_default=False,
         ),
         migrations.AlterField(
