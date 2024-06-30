@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             model_name='chapterquiz',
             name='Explanation',
             field=models.TextField(blank=True, null=True),
-        )
+        ),
         migrations.AlterField(
             model_name='studentchapterquizanswer',
             name='selected_answer',
