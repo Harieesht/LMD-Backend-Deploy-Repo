@@ -248,9 +248,14 @@ def chapter_quiz_evaluate(request):
         except StudentChapterQuizProgressPercent.DoesNotExist:
             continue
     
-    subjectprogress, created = SubjectProgress.objects.get_or_create(student_id=user_id,subject_id=subject_id)
-    subjectprogress.progress = progress//len(chapter_ids)
-    subjectprogress.save()
+    try:
+        subjectprogress, created = SubjectProgress.objects.get_or_create(student_id=user_id, subject_id=subject_id)
+    except IntegrityError:
+    # Handle the case where get_or_create() fails due to database constraints or schema issues
+        print("Failed to create or retrieve SubjectProgress object.")
+    else:
+        subjectprogress.progress = progress // len(chapter_ids)
+        subjectprogress.save()
         
     return Response({'message':'Progress have been saved','progress':studentchapterprogress.progress},status=status.HTTP_201_CREATED) 
 
