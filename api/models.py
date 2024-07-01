@@ -97,7 +97,7 @@ class ChapterItem(models.Model):
 class SubjectProgress(models.Model):
     subject=models.ForeignKey(Subject,on_delete=models.PROTECT)
     student=models.ForeignKey(Student,on_delete=models.PROTECT,related_name='progress')
-    progress=models.PositiveSmallIntegerField()
+    progress=models.PositiveSmallIntegerField(null=True,blank=True)
     completed=models.BooleanField(default=False)
 
 
