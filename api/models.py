@@ -98,15 +98,15 @@ class SubjectProgress(models.Model):
     subject=models.ForeignKey(Subject,on_delete=models.PROTECT)
     student=models.ForeignKey(Student,on_delete=models.PROTECT,related_name='progress')
     progress=models.PositiveSmallIntegerField()
-    # completed=models.BooleanField(default=False)
+    completed=models.BooleanField(default=False)
 
 
     def __str__(self):
         return f"{self.student.name}-{self.subject.title} Progress"
     
     def save(self,*args,**kwargs):
-        # if self.progress==100:
-        #     self.completed=True
+        if self.progress==100:
+            self.completed=True
         super().save(*args,**kwargs)
 
     
