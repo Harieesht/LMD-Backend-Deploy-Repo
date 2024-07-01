@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
+from django.db import IntegrityError
 import jwt
 from django.conf import settings
 from .models import  *
