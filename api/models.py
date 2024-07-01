@@ -105,8 +105,8 @@ class SubjectProgress(models.Model):
         return f"{self.student.name}-{self.subject.title} Progress"
     
     def save(self,*args,**kwargs):
-        if self.progress==100:
-            self.completed=True
+        # if self.progress==100:
+        #     self.completed=True
         super().save(*args,**kwargs)
 
     
