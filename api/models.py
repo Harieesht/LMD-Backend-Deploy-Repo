@@ -107,7 +107,7 @@ class SubjectProgress(models.Model):
     def save(self,*args,**kwargs):
         if self.progress==100:
             self.completed=True
-        super().save(args,*kwargs)
+        super().save(*args,**kwargs)
 
     
 class ChapterQuiz(models.Model):
